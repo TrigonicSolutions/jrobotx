@@ -4,8 +4,9 @@
 	<groupId>net.sourceforge.jrobotx</groupId>
 	<artifactId>jrobotx</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Java Robot Exclusion Compliance Library</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>A Java library that provides a client for the Robot Exclusion Protocol.</description>
 	<url>https://sourceforge.net/projects/jrobotx/</url>
 	<inceptionYear>2009</inceptionYear>
 	<licenses>
@@ -23,6 +24,9 @@
 			<organizationUrl>http://www.trigonic.com/</organizationUrl>
 		</developer>
 	</developers>
+	<scm>
+		<url>http://jrobotx.svn.sourceforge.net/viewvc/jrobotx/</url>
+	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
