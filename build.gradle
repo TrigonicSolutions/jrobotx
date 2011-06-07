@@ -1,0 +1,115 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'sign'
+apply plugin: 'eclipse'
+
+group = 'com.trigonic'
+artifact = 'jrobotx'
+version = '0.1'
+
+def props = new Properties();
+def localProperties = new File("local.properties")
+if (localProperties.exists()) localProperties.withInputStream { props.load(it) }
+
+configurations {
+    deployerJars
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'de.huxhorn.gradle:de.huxhorn.gradle.pgp-plugin:0.0.3'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'commons-io:commons-io:1.4'
+    compile 'log4j:log4j:1.2.15'
+
+    testCompile 'junit:junit:4.+'
+    testCompile 'org.easymock:easymock:2.4'
+    testCompile 'org.easymock:easymockclassextension:2.4'
+
+    deployerJars 'org.apache.maven.wagon:wagon-http:1.0-beta-7'
+}
+
+task packageJavadoc(type: Jar, dependsOn: 'javadoc') {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+task packageSources(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives packageJavadoc
+    archives packageSources
+}
+
+pgp {
+    secretKeyRingFile = new File("${System.properties['user.home']}/.gnupg/secring.gpg")
+    keyId = props.get('sign.key.id')
+    password = props.get('sign.key.password')
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        configuration = configurations.deployerJars
+        repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2') {
+            authentication(userName: props.get('maven.repository.user'), password: props.get('maven.repository.password'))
+        }
+
+        pom.project {
+            name 'jrobotx - Java Robot Exclusion Compliance Library'
+            packaging 'jar'
+            description 'Library to provide compliance with the Web Robot Exclusion protocol (robots.txt)'
+            url 'https://github.com/AlanKrueger/jrobotx'
+            inceptionYear '2011'
+
+            parent {
+                groupId 'org.sonatype.oss'
+                artifactId 'oss-parent'
+                version '7'
+            }
+     
+            scm {
+                url 'scm:git://github.com/AlanKrueger/jrobotx.git'
+                connection 'scm:git://github.com/AlanKrueger/jrobotx.git'
+            }
+     
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+     
+            developers {
+                developer {
+                    id 'akrueger'
+                    name 'Alan Krueger'
+                    email 'alan@trigonic.com'
+                    roles{
+                        role 'Developer'
+                    }
+                    timezone '-6'
+                }
+            }
+        }
+    }
+}
+
+task createWrapper(type: Wrapper) {
+    gradleVersion = '1.0-milestone-3'
+}
+
