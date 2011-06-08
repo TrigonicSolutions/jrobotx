@@ -5,7 +5,7 @@ apply plugin: 'eclipse'
 
 group = 'com.trigonic'
 artifact = 'jrobotx'
-version = '0.1'
+version = '0.2'
 
 def props = new Properties();
 def localProperties = new File("local.properties")
