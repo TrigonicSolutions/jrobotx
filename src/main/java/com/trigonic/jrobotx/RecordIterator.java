@@ -98,17 +98,17 @@ public class RecordIterator extends AbstractIterator<Record> {
 					String[] pieces = splitLine(line);
 					if (pieces[0].equals("")) {
 					    // nothing on this line
-					} else if (pieces[0].equals(USER_AGENT)) {
+					} else if (pieces[0].equalsIgnoreCase(USER_AGENT)) {
 						if (inUserAgents) {
 							userAgents.add(pieces[1]);
 						} else {
 							pushBack.add(0, line);
 							break;
 						}
-					} else if (pieces[0].equals(ALLOW) || pieces[0].equals(DISALLOW)) {
+					} else if (pieces[0].equalsIgnoreCase(ALLOW) || pieces[0].equalsIgnoreCase(DISALLOW)) {
 						inUserAgents = false;
 						rules.add(pieces);
-					} else if (pieces[0].equals(SITEMAP)) {
+					} else if (pieces[0].equalsIgnoreCase(SITEMAP)) {
 						// ignore, can't use this
 					} else {
 						unknownFields.add(pieces[0]);
