@@ -63,7 +63,7 @@ public class Record {
 
 		for (String[] rule : rules) {
 			if (rule[1].length() > 0 && ruleMatches(rule[1], path)) {
-                if (rule[0].equals(ALLOW)) {
+                if (rule[0].equalsIgnoreCase(ALLOW)) {
                     allowed = true;
                 } else
                     disallowed = true;
