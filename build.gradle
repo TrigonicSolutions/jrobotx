@@ -72,7 +72,7 @@ uploadArchives {
             name 'jrobotx - Java Robot Exclusion Compliance Library'
             packaging 'jar'
             description 'Library to provide compliance with the Web Robot Exclusion protocol (robots.txt)'
-            url 'https://github.com/AlanKrueger/jrobotx'
+            url 'https://github.com/TrigonicSolutions/jrobotx'
             inceptionYear '2011'
 
             parent {
@@ -82,8 +82,8 @@ uploadArchives {
             }
      
             scm {
-                url 'scm:git://github.com/AlanKrueger/jrobotx.git'
-                connection 'scm:git://github.com/AlanKrueger/jrobotx.git'
+                url 'scm:git://github.com/TrigonicSolutions/jrobotx.git'
+                connection 'scm:git://github.com/TrigonicSolutions/jrobotx.git'
             }
      
             licenses {
