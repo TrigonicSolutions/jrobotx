@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 public class RecordTest {
     @Test
     public void test() {
-        Set<String> userAgents = new HashSet<String>(Arrays.asList("netscape", "mozilla"));
+        Set<String> userAgents = new HashSet<String>(Arrays.asList("netscape", "Mozilla"));
         List<String[]> rules = new ArrayList<String[]>();
         rules.add(new String[] {"Disallow", ""});
         rules.add(new String[] {"Disallow", "/foo/bar/"});
